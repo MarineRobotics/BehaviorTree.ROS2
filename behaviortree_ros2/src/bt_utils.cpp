@@ -151,7 +151,8 @@ void RegisterPlugins(bt_server::Params& params, BT::BehaviorTreeFactory& factory
 
     for(const auto& entry : directory_iterator(plugin_directory))
     {
-      if(entry.path().extension() == ".so")
+      const auto ext = entry.path().extension();
+      if(ext == ".so" || ext == ".dylib" || ext == ".dll")
       {
         LoadPlugin(factory, entry.path(), ros_params);
       }
